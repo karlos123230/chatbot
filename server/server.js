@@ -28,7 +28,7 @@ const stats = {
 };
 
 // Inicializar cliente WhatsApp
-function initWhatsApp() {
+async function initWhatsApp() {
   console.log('🚀 Iniciando WhatsApp Client...');
   
   // Configuração do Puppeteer para Railway
@@ -48,12 +48,34 @@ function initWhatsApp() {
     timeout: 60000 // 60 segundos de timeout
   };
 
-  // Usar Chromium do Nixpacks se disponível
-  if (process.env.NIXPACKS_CHROMIUM_PATH) {
-    console.log('📦 Usando Chromium do Nixpacks');
-    puppeteerConfig.executablePath = process.env.NIXPACKS_CHROMIUM_PATH;
-  } else {
-    console.log('📦 Usando Puppeteer padrão');
+  // Procurar Chromium em vários locais possíveis
+  const possiblePaths = [
+    '/usr/bin/chromium',
+    '/usr/bin/chromium-browser',
+    '/usr/bin/google-chrome',
+    '/usr/bin/google-chrome-stable',
+    process.env.NIXPACKS_CHROMIUM_PATH,
+    process.env.PUPPETEER_EXECUTABLE_PATH
+  ].filter(Boolean);
+
+  let chromiumFound = false;
+  for (const path of possiblePaths) {
+    try {
+      const fs = await import('fs');
+      if (fs.existsSync(path)) {
+        console.log('✅ Chromium encontrado em:', path);
+        puppeteerConfig.executablePath = path;
+        chromiumFound = true;
+        break;
+      }
+    } catch (e) {
+      // Continuar procurando
+    }
+  }
+
+  if (!chromiumFound) {
+    console.log('⚠️ Chromium não encontrado, usando Puppeteer padrão');
+    console.log('📦 Puppeteer vai tentar baixar Chrome automaticamente...');
   }
 
   client = new Client({

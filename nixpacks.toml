@@ -1,6 +1,6 @@
 # Nixpacks configuration for Railway
 [phases.setup]
-nixPkgs = ["chromium"]
+aptPkgs = ["chromium", "chromium-driver"]
 
 [phases.install]
 cmds = ["npm install --production"]
