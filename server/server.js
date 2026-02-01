@@ -221,6 +221,112 @@ async function processAutoReply(msg) {
   }
 }
 
+// Rota raiz - Página de boas-vindas
+app.get('/', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>WhatsApp Pro - API</title>
+      <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          padding: 20px;
+        }
+        .container {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border-radius: 20px;
+          padding: 40px;
+          max-width: 600px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; text-align: center; }
+        .status { 
+          background: rgba(16, 185, 129, 0.2);
+          border: 1px solid rgba(16, 185, 129, 0.4);
+          padding: 15px;
+          border-radius: 10px;
+          margin: 20px 0;
+          text-align: center;
+          font-weight: 600;
+        }
+        .links {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin-top: 30px;
+        }
+        .link {
+          background: rgba(255, 255, 255, 0.15);
+          padding: 15px 20px;
+          border-radius: 10px;
+          text-decoration: none;
+          color: white;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          transition: all 0.3s ease;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .link:hover {
+          background: rgba(255, 255, 255, 0.25);
+          transform: translateX(5px);
+        }
+        .info {
+          margin-top: 30px;
+          padding: 20px;
+          background: rgba(59, 130, 246, 0.1);
+          border: 1px solid rgba(59, 130, 246, 0.3);
+          border-radius: 10px;
+          font-size: 0.9rem;
+          line-height: 1.6;
+        }
+        .info strong { color: #60a5fa; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>📱 WhatsApp Pro API</h1>
+        <div class="status">✅ Servidor Online</div>
+        
+        <div class="links">
+          <a href="/health" class="link">
+            <span>🏥 Health Check</span>
+            <span>→</span>
+          </a>
+          <a href="/api/status" class="link">
+            <span>📊 Status WhatsApp</span>
+            <span>→</span>
+          </a>
+        </div>
+
+        <div class="info">
+          <strong>🎯 Frontend:</strong><br>
+          Acesse o painel em:<br>
+          <a href="https://whatsapp-pro-frontend.onrender.com" style="color: #60a5fa;">
+            whatsapp-pro-frontend.onrender.com
+          </a>
+          <br><br>
+          <strong>📚 Documentação:</strong><br>
+          Veja o README.md no GitHub para mais informações.
+        </div>
+      </div>
+    </body>
+    </html>
+  `);
+});
+
 // Rotas API
 app.get('/api/status', (req, res) => {
   res.json({ isReady, qrCode, stats });
