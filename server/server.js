@@ -47,13 +47,8 @@ function initWhatsApp() {
     timeout: 60000 // 60 segundos de timeout
   };
 
-  // Usar Chromium do sistema se disponível
-  if (process.env.PUPPETEER_EXECUTABLE_PATH) {
-    console.log('📦 Usando Chromium do sistema:', process.env.PUPPETEER_EXECUTABLE_PATH);
-    puppeteerConfig.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
-  } else {
-    console.log('📦 Puppeteer vai baixar Chrome automaticamente...');
-  }
+  // NÃO usar executablePath - deixar Puppeteer baixar Chrome automaticamente
+  console.log('📦 Puppeteer vai baixar Chrome automaticamente...');
 
   client = new Client({
     authStrategy: new LocalAuth(),
