@@ -1,0 +1,91 @@
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                                                                   ║
+║                    ⚠️  ATENÇÃO - ERRO 404  ⚠️                     ║
+║                                                                   ║
+║         A funcionalidade de buscar números NÃO VAI FUNCIONAR      ║
+║              até você REINICIAR O SERVIDOR!                       ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+
+🎯 SOLUÇÃO RÁPIDA (30 SEGUNDOS):
+
+   1. Clique DUAS VEZES no arquivo:
+   
+      📄 REINICIAR-AGORA.bat
+   
+   2. Uma nova janela vai abrir
+   
+   3. Aguarde ver esta mensagem:
+   
+      ✅ POST /api/find-numbers ✨
+   
+   4. Volte ao navegador e teste!
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+📚 MAIS INFORMAÇÕES:
+
+   • COMO-REINICIAR.txt     → Guia completo passo a passo
+   • RESTART-SERVER.md      → Documentação técnica
+   • restart.bat            → Script alternativo
+   • restart.ps1            → Script PowerShell
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+❓ POR QUE ISSO ACONTECEU?
+
+   A nova funcionalidade de buscar números foi adicionada ao código,
+   mas o servidor precisa ser REINICIADO para registrar a nova rota.
+   
+   É como adicionar um novo cômodo em uma casa - você precisa
+   "reconstruir" para que ele exista!
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+✅ COMO SABER SE DEU CERTO?
+
+   No console do servidor você deve ver:
+   
+   Servidor rodando na porta 3001
+   Rotas disponíveis:
+     GET  /api/status
+     GET  /api/chats
+     GET  /api/contacts
+     GET  /api/chat/:chatId/messages
+     POST /api/send
+     POST /api/disconnect
+     POST /api/reconnect
+     POST /api/find-numbers ✨  ← ESTA LINHA DEVE APARECER!
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+🆘 PRECISA DE AJUDA?
+
+   Se após reiniciar ainda não funcionar:
+   
+   1. Feche TODAS as janelas do terminal
+   2. Abra um NOVO terminal
+   3. Digite: npm run dev
+   4. Aguarde o servidor iniciar
+   5. Teste novamente
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                                                                   ║
+║  👉 CLIQUE EM: REINICIAR-AGORA.bat                                ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+

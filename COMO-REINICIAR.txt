@@ -1,0 +1,88 @@
+╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║          🔄 COMO REINICIAR O SERVIDOR - PASSO A PASSO          ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
+
+⚠️  VOCÊ ESTÁ RECEBENDO ERRO 404 PORQUE O SERVIDOR NÃO FOI REINICIADO!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 OPÇÃO 1: USAR SCRIPT AUTOMÁTICO (RECOMENDADO)
+
+   1. Clique duas vezes no arquivo: restart.bat
+   
+   2. Uma nova janela vai abrir com o servidor
+   
+   3. Aguarde ver a mensagem:
+      "POST /api/find-numbers ✨"
+   
+   4. Pronto! Teste no navegador
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 OPÇÃO 2: MANUAL
+
+   PASSO 1: Encontre a janela do terminal onde o servidor está rodando
+   
+   PASSO 2: Pressione Ctrl + C para parar o servidor
+   
+   PASSO 3: Digite o comando:
+            npm run dev
+   
+   PASSO 4: Pressione Enter
+   
+   PASSO 5: Aguarde ver estas mensagens:
+   
+            ✅ Servidor rodando na porta 3001
+            ✅ Rotas disponíveis:
+               ...
+               POST /api/find-numbers ✨  <-- DEVE APARECER!
+   
+   PASSO 6: Volte ao navegador e teste novamente
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 OPÇÃO 3: SE NADA FUNCIONAR
+
+   1. Feche TODAS as janelas do terminal
+   
+   2. Abra um NOVO terminal
+   
+   3. Digite:
+      cd caminho/para/o/projeto
+      npm run dev
+   
+   4. Aguarde o servidor iniciar
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔍 COMO SABER SE DEU CERTO?
+
+   ✅ No console do servidor você deve ver:
+      "POST /api/find-numbers ✨"
+   
+   ✅ No navegador, o erro 404 deve sumir
+   
+   ✅ A funcionalidade de buscar números deve funcionar
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❓ AINDA COM PROBLEMAS?
+
+   1. Verifique se a porta 3001 está livre:
+      netstat -ano | findstr :3001
+   
+   2. Se houver processo, mate-o:
+      taskkill /PID <numero_do_pid> /F
+   
+   3. Tente novamente
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 DICA: Sempre que adicionar novas rotas ou modificar o servidor,
+         você PRECISA reiniciá-lo!
+
+╔════════════════════════════════════════════════════════════════╗
+║  Após reiniciar, volte ao navegador e teste a funcionalidade  ║
+╚════════════════════════════════════════════════════════════════╝
