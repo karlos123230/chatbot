@@ -1868,7 +1868,7 @@ function App() {
                     onClick={startNumberFinder}
                     disabled={isSearching || !finderState}
                   >
-                    {isSearching ? '🔄 Buscando...' : '🚀 Iniciar Busca'}
+                    {isSearching ? '🔄 Buscando...' : '🚀 Iniciar Buscas'}
                   </button>
 
                   {isSearching && (
