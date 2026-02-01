@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
-import { MessageCircle, Users, Send, BarChart3, QrCode, CheckCircle, XCircle, ArrowLeft, Search, Smartphone, Calendar, UserPlus, Upload, Download, Trash2, Bot, Clock, Shield } from 'lucide-react';
+import { MessageCircle, Users, Send, BarChart3, QrCode, CheckCircle, XCircle, ArrowLeft, Search, Smartphone, Calendar, UserPlus, Upload, Download, Trash2, Bot, Clock, Shield, LogOut } from 'lucide-react';
 import './App.css';
 
 // Configuração da API - usa variável de ambiente ou localhost
@@ -1214,6 +1214,28 @@ function App() {
     setStatus({ isReady: false, qrCode: null, stats: {} });
   };
 
+  const disconnect = async () => {
+    if (!window.confirm('Tem certeza que deseja desconectar do WhatsApp?')) {
+      return;
+    }
+    try {
+      const response = await fetch(`${API_URL}/api/disconnect`, {
+        method: 'POST'
+      });
+      const data = await response.json();
+      console.log('Disconnect response:', data);
+      // Atualizar status
+      setStatus({
+        isReady: false,
+        qrCode: null,
+        stats: { messagesReceived: 0, messagesSent: 0, contacts: 0, chats: 0 }
+      });
+    } catch (error) {
+      console.error('Erro ao desconectar:', error);
+      alert('Erro ao desconectar. Tente novamente.');
+    }
+  };
+
   const loadChatMessages = async (chatId) => {
     try {
       const res = await fetch(`${API_URL}/api/chat/${encodeURIComponent(chatId)}/messages`);
@@ -1429,6 +1451,13 @@ function App() {
                     <p>Conversas Ativas</p>
                   </div>
                 </div>
+              </div>
+              
+              <div className="disconnect-section">
+                <button className="disconnect-btn" onClick={disconnect}>
+                  <LogOut size={20} strokeWidth={2} />
+                  Desconectar do WhatsApp
+                </button>
               </div>
             </div>
           )}
