@@ -29,20 +29,30 @@ const stats = {
 
 // Inicializar cliente WhatsApp
 function initWhatsApp() {
+  // Configuração do Puppeteer para Render
+  const puppeteerConfig = {
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--no-first-run',
+      '--no-zygote',
+      '--disable-gpu',
+      '--single-process',
+      '--no-zygote'
+    ]
+  };
+
+  // Usar Chromium do sistema se disponível (Render)
+  if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+    puppeteerConfig.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+  }
+
   client = new Client({
     authStrategy: new LocalAuth(),
-    puppeteer: { 
-      headless: true,
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-accelerated-2d-canvas',
-        '--no-first-run',
-        '--no-zygote',
-        '--disable-gpu'
-      ]
-    }
+    puppeteer: puppeteerConfig
   });
 
   client.on('qr', async (qr) => {
