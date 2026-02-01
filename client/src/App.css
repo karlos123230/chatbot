@@ -3237,3 +3237,864 @@ header h2 {
   margin: 0;
   color: #e5e7eb;
 }
+  .autoreply-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .time-range {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .autoreply-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==================== RESPONSIVIDADE GLOBAL ==================== */
+
+/* Tablets e dispositivos médios (1024px e abaixo) */
+@media (max-width: 1024px) {
+  .app {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    padding: 1rem 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+  }
+  
+  .logo {
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  nav {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0 1rem;
+    gap: 0.5rem;
+  }
+  
+  nav::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  nav::-webkit-scrollbar-track {
+    background: rgba(139, 92, 246, 0.05);
+  }
+  
+  nav::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.3);
+    border-radius: 10px;
+  }
+  
+  nav button {
+    white-space: nowrap;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+  
+  header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  header h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .stat-card {
+    padding: 1.5rem;
+  }
+  
+  .stat-card h3 {
+    font-size: 2rem;
+  }
+  
+  .chat-container,
+  .contacts-container,
+  .send-container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  
+  .chat-list-panel,
+  .contacts-list-panel {
+    max-height: 300px;
+    margin-bottom: 1rem;
+  }
+  
+  .send-history-panel {
+    max-height: 300px;
+  }
+  
+  .finder-container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  
+  .finder-config-panel {
+    margin-bottom: 1rem;
+  }
+  
+  .groups-container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  
+  .groups-sidebar {
+    max-height: 300px;
+    margin-bottom: 1rem;
+  }
+  
+  .group-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .autoreply-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile (768px e abaixo) */
+@media (max-width: 768px) {
+  .logo h1 {
+    font-size: 1.2rem;
+  }
+  
+  .logo svg {
+    width: 32px;
+    height: 32px;
+  }
+  
+  nav button {
+    padding: 0.65rem 1rem;
+    font-size: 0.8rem;
+    gap: 0.5rem;
+  }
+  
+  nav button svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  header {
+    padding: 1rem;
+  }
+  
+  header h2 {
+    font-size: 1.25rem;
+  }
+  
+  .back-button {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .status {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .content {
+    padding: 1rem;
+    min-height: 400px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-card {
+    padding: 1.25rem;
+  }
+  
+  .stat-card svg {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .stat-card h3 {
+    font-size: 1.75rem;
+  }
+  
+  .stat-card p {
+    font-size: 0.875rem;
+  }
+  
+  .qr-section {
+    padding: 2rem 1rem;
+  }
+  
+  .qr-section h3 {
+    font-size: 1.5rem;
+  }
+  
+  .qr-section img {
+    max-width: 280px;
+    padding: 1rem;
+  }
+  
+  .list-item {
+    padding: 1rem;
+  }
+  
+  .avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 1.25rem;
+  }
+  
+  .info h4 {
+    font-size: 1rem;
+  }
+  
+  .info p {
+    font-size: 0.85rem;
+  }
+  
+  .send-form input,
+  .send-form textarea {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .send-form button {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .send-form-card {
+    padding: 1.5rem;
+  }
+  
+  .send-form-card h3 {
+    font-size: 1.25rem;
+  }
+  
+  .templates-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+  
+  .message-preview-card {
+    padding: 1.5rem;
+  }
+  
+  .preview-bubble {
+    max-width: 100%;
+  }
+  
+  .chat-header {
+    padding: 1rem;
+  }
+  
+  .chat-header h3 {
+    font-size: 1.125rem;
+  }
+  
+  .messages-container {
+    padding: 1rem;
+  }
+  
+  .message {
+    max-width: 85%;
+  }
+  
+  .message-bubble {
+    padding: 0.875rem 1rem;
+  }
+  
+  .quick-reply {
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+  
+  .quick-reply input {
+    padding: 0.875rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .quick-reply button {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .contact-profile {
+    padding: 1.5rem;
+  }
+  
+  .avatar-large {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
+  }
+  
+  .contact-profile h2 {
+    font-size: 1.5rem;
+  }
+  
+  .contact-actions {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-btn {
+    width: 100%;
+  }
+  
+  .quick-message-section {
+    padding: 1rem;
+  }
+  
+  .quick-message-section h3 {
+    font-size: 1.125rem;
+  }
+  
+  .contact-info-section {
+    padding: 1rem;
+  }
+  
+  .contact-info-section h3 {
+    font-size: 1.125rem;
+  }
+  
+  .info-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .finder-card {
+    padding: 1.5rem;
+  }
+  
+  .finder-card h3 {
+    font-size: 1.25rem;
+  }
+  
+  .finder-results-panel {
+    padding: 1rem;
+  }
+  
+  .results-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .export-btn,
+  .mass-send-btn {
+    width: 100%;
+  }
+  
+  .result-item {
+    padding: 0.875rem;
+  }
+  
+  .result-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 1.125rem;
+  }
+  
+  .result-info h4 {
+    font-size: 0.9rem;
+  }
+  
+  .result-info p {
+    font-size: 0.8rem;
+  }
+  
+  .result-action-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+  
+  .mass-message-panel {
+    padding: 1rem;
+  }
+  
+  .mass-message-header h4 {
+    font-size: 1.125rem;
+  }
+  
+  .mass-actions {
+    flex-direction: column;
+  }
+  
+  .schedule-form-card {
+    padding: 1.5rem;
+  }
+  
+  .schedule-form-header h3 {
+    font-size: 1.25rem;
+  }
+  
+  .scheduled-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .scheduled-header {
+    width: 100%;
+  }
+  
+  .scheduled-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .group-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-card-small {
+    padding: 0.875rem;
+  }
+  
+  .group-tab-buttons {
+    overflow-x: auto;
+  }
+  
+  .tab-btn {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  
+  .members-actions {
+    flex-direction: column;
+  }
+  
+  .btn-action {
+    width: 100%;
+  }
+  
+  .inline-form .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .member-item {
+    padding: 0.875rem;
+  }
+  
+  .member-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 1.125rem;
+  }
+  
+  .member-info h4 {
+    font-size: 0.9rem;
+  }
+  
+  .member-info p {
+    font-size: 0.8rem;
+  }
+  
+  .member-remove-btn {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .group-details {
+    padding: 1rem;
+  }
+  
+  .group-details-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .group-details-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .group-actions-header {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .action-btn-header {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.8rem;
+  }
+  
+  .autoreply-settings-card {
+    padding: 1.5rem;
+  }
+  
+  .autoreply-settings-card h3 {
+    font-size: 1.25rem;
+  }
+  
+  .autoreply-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .autoreply-tabs {
+    padding: 1.5rem;
+  }
+  
+  .tab-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .btn-primary-small {
+    width: 100%;
+  }
+  
+  .rule-item {
+    padding: 1rem;
+  }
+  
+  .rule-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .rule-actions {
+    position: static;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 0.75rem;
+  }
+  
+  .time-range {
+    grid-template-columns: 1fr;
+  }
+  
+  .blacklist-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .action-btn.delete {
+    align-self: flex-end;
+  }
+  
+  .log-item {
+    padding: 0.875rem;
+  }
+  
+  .log-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* Mobile pequeno (480px e abaixo) */
+@media (max-width: 480px) {
+  .logo h1 {
+    font-size: 1rem;
+  }
+  
+  .logo svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  nav button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+  
+  header h2 {
+    font-size: 1.125rem;
+  }
+  
+  .back-button {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .status {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.8rem;
+  }
+  
+  .content {
+    padding: 0.875rem;
+  }
+  
+  .stat-card {
+    padding: 1rem;
+  }
+  
+  .stat-card svg {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .stat-card h3 {
+    font-size: 1.5rem;
+  }
+  
+  .qr-section {
+    padding: 1.5rem 0.875rem;
+  }
+  
+  .qr-section h3 {
+    font-size: 1.25rem;
+  }
+  
+  .qr-section img {
+    max-width: 240px;
+  }
+  
+  .list-item {
+    padding: 0.875rem;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 1.125rem;
+  }
+  
+  .info h4 {
+    font-size: 0.9rem;
+  }
+  
+  .info p {
+    font-size: 0.8rem;
+  }
+  
+  .send-form-card {
+    padding: 1rem;
+  }
+  
+  .send-form-card h3 {
+    font-size: 1.125rem;
+  }
+  
+  .send-form input,
+  .send-form textarea {
+    padding: 0.875rem;
+    font-size: 0.875rem;
+  }
+  
+  .send-form button {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  
+  .message-preview-card {
+    padding: 1rem;
+  }
+  
+  .message-preview-card h3 {
+    font-size: 1.125rem;
+  }
+  
+  .chat-header {
+    padding: 0.875rem;
+  }
+  
+  .chat-header h3 {
+    font-size: 1rem;
+  }
+  
+  .messages-container {
+    padding: 0.875rem;
+  }
+  
+  .message {
+    max-width: 90%;
+  }
+  
+  .message-bubble {
+    padding: 0.75rem 0.875rem;
+    font-size: 0.875rem;
+  }
+  
+  .quick-reply {
+    padding: 0.875rem;
+  }
+  
+  .quick-reply input {
+    padding: 0.75rem 0.875rem;
+    font-size: 0.875rem;
+  }
+  
+  .quick-reply button {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .contact-profile {
+    padding: 1rem;
+  }
+  
+  .avatar-large {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+  
+  .contact-profile h2 {
+    font-size: 1.25rem;
+  }
+  
+  .finder-card {
+    padding: 1rem;
+  }
+  
+  .finder-card h3 {
+    font-size: 1.125rem;
+  }
+  
+  .finder-results-panel {
+    padding: 0.875rem;
+  }
+  
+  .result-item {
+    padding: 0.75rem;
+  }
+  
+  .mass-message-panel {
+    padding: 0.875rem;
+  }
+  
+  .schedule-form-card {
+    padding: 1rem;
+  }
+  
+  .scheduled-item {
+    padding: 0.875rem;
+  }
+  
+  .group-details {
+    padding: 0.875rem;
+  }
+  
+  .group-details-header h2 {
+    font-size: 1.25rem;
+  }
+  
+  .autoreply-settings-card {
+    padding: 1rem;
+  }
+  
+  .autoreply-settings-card h3 {
+    font-size: 1.125rem;
+  }
+  
+  .autoreply-tabs {
+    padding: 1rem;
+  }
+  
+  .rule-item {
+    padding: 0.875rem;
+  }
+}
+
+/* Landscape mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  .sidebar {
+    padding: 0.5rem 0;
+  }
+  
+  .logo {
+    margin-bottom: 0.5rem;
+  }
+  
+  nav {
+    padding: 0 0.5rem;
+  }
+  
+  .main-content {
+    padding: 0.5rem;
+  }
+  
+  header {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .content {
+    padding: 0.75rem;
+    min-height: 300px;
+  }
+  
+  .chat-container,
+  .contacts-container,
+  .finder-container,
+  .groups-container {
+    height: auto;
+    max-height: 400px;
+  }
+  
+  .messages-container {
+    max-height: 250px;
+  }
+  
+  .list {
+    max-height: 300px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .sidebar,
+  .back-button,
+  .status,
+  button,
+  .action-btn,
+  .quick-reply {
+    display: none !important;
+  }
+  
+  .app {
+    display: block;
+  }
+  
+  .main-content {
+    padding: 0;
+  }
+  
+  .content {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  
+  * {
+    color: #000 !important;
+    background: #fff !important;
+  }
+}
