@@ -4,9 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "node server.js",
-    "start": "node server.js",
-    "build": "echo 'Build completed'",
-    "postinstall": "node -e \"console.log('Puppeteer setup complete')\""
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
@@ -15,7 +13,6 @@
     "qrcode": "^1.5.3",
     "socket.io": "^4.6.1",
     "sql.js": "^1.10.3",
-    "node-cron": "^3.0.3",
-    "puppeteer": "^21.0.0"
+    "node-cron": "^3.0.3"
   }
 }

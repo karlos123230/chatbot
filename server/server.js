@@ -31,7 +31,7 @@ const stats = {
 function initWhatsApp() {
   console.log('🚀 Iniciando WhatsApp Client...');
   
-  // Configuração do Puppeteer para Railway/Render
+  // Configuração do Puppeteer para Railway
   const puppeteerConfig = {
     headless: true,
     args: [
@@ -42,13 +42,19 @@ function initWhatsApp() {
       '--no-first-run',
       '--no-zygote',
       '--disable-gpu',
-      '--single-process'
+      '--single-process',
+      '--disable-software-rasterizer'
     ],
     timeout: 60000 // 60 segundos de timeout
   };
 
-  // NÃO usar executablePath - deixar Puppeteer baixar Chrome automaticamente
-  console.log('📦 Puppeteer vai baixar Chrome automaticamente...');
+  // Usar Chromium do Nixpacks se disponível
+  if (process.env.NIXPACKS_CHROMIUM_PATH) {
+    console.log('📦 Usando Chromium do Nixpacks');
+    puppeteerConfig.executablePath = process.env.NIXPACKS_CHROMIUM_PATH;
+  } else {
+    console.log('📦 Usando Puppeteer padrão');
+  }
 
   client = new Client({
     authStrategy: new LocalAuth(),
