@@ -28,54 +28,26 @@ const stats = {
 };
 
 // Inicializar cliente WhatsApp
-async function initWhatsApp() {
+function initWhatsApp() {
   console.log('🚀 Iniciando WhatsApp Client...');
   
-  // Configuração do Puppeteer para Railway
+  // Configuração do Puppeteer
   const puppeteerConfig = {
     headless: true,
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
       '--disable-dev-shm-usage',
-      '--disable-accelerated-2d-canvas',
-      '--no-first-run',
-      '--no-zygote',
       '--disable-gpu',
-      '--single-process',
-      '--disable-software-rasterizer'
-    ],
-    timeout: 60000 // 60 segundos de timeout
+      '--disable-software-rasterizer',
+      '--disable-dev-tools'
+    ]
   };
 
-  // Procurar Chromium em vários locais possíveis
-  const possiblePaths = [
-    '/usr/bin/chromium',
-    '/usr/bin/chromium-browser',
-    '/usr/bin/google-chrome',
-    '/usr/bin/google-chrome-stable',
-    process.env.NIXPACKS_CHROMIUM_PATH,
-    process.env.PUPPETEER_EXECUTABLE_PATH
-  ].filter(Boolean);
-
-  let chromiumFound = false;
-  for (const path of possiblePaths) {
-    try {
-      const fs = await import('fs');
-      if (fs.existsSync(path)) {
-        console.log('✅ Chromium encontrado em:', path);
-        puppeteerConfig.executablePath = path;
-        chromiumFound = true;
-        break;
-      }
-    } catch (e) {
-      // Continuar procurando
-    }
-  }
-
-  if (!chromiumFound) {
-    console.log('⚠️ Chromium não encontrado, usando Puppeteer padrão');
-    console.log('📦 Puppeteer vai tentar baixar Chrome automaticamente...');
+  // Usar Chromium do sistema (Alpine Linux)
+  if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+    puppeteerConfig.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+    console.log('✅ Usando Chromium:', process.env.PUPPETEER_EXECUTABLE_PATH);
   }
 
   client = new Client({
