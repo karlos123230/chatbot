@@ -3,8 +3,11 @@ import { io } from 'socket.io-client';
 import { MessageCircle, Users, Send, BarChart3, QrCode, CheckCircle, XCircle, ArrowLeft, Search, Smartphone, Calendar, UserPlus, Upload, Download, Trash2, Bot, Clock, Shield } from 'lucide-react';
 import './App.css';
 
-const API_URL = 'http://localhost:3001';
+// Configuração da API - usa variável de ambiente ou localhost
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const socket = io(API_URL);
+
+console.log('🔗 Conectando ao backend:', API_URL);
 
 function App() {
   const [status, setStatus] = useState({ isReady: false, qrCode: null, stats: {} });
