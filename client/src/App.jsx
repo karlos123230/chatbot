@@ -95,6 +95,8 @@ function App() {
   const [blacklistNumbers, setBlacklistNumbers] = useState([]);
   const [showAddBlacklist, setShowAddBlacklist] = useState(false);
   const [blacklistForm, setBlacklistForm] = useState({ number: '', reason: '' });
+  const [loadingMessage, setLoadingMessage] = useState('Aguardando inicialização...');
+  const [loadingPercent, setLoadingPercent] = useState(0);
 
   const messageTemplates = [
     { id: 1, name: 'Saudação', text: 'Olá! Como posso ajudar você hoje? 😊' },
@@ -230,10 +232,14 @@ function App() {
     fetchStatus();
     
     socket.on('qr', (qr) => {
+      console.log('✅ QR Code recebido do servidor');
       setStatus(prev => ({ ...prev, qrCode: qr }));
+      setLoadingMessage('QR Code gerado! Escaneie com seu WhatsApp');
     });
 
     socket.on('ready', () => {
+      console.log('✅ WhatsApp conectado!');
+      setLoadingMessage('Conectado!');
       fetchStatus();
     });
 
@@ -241,7 +247,49 @@ function App() {
       fetchStatus();
     });
 
-    return () => socket.disconnect();
+    socket.on('loading', (data) => {
+      console.log('⏳ Carregando:', data.percent, '%', data.message);
+      setLoadingPercent(data.percent);
+      setLoadingMessage(data.message || 'Carregando WhatsApp...');
+    });
+
+    socket.on('init_error', (error) => {
+      console.error('❌ Erro na inicialização:', error);
+      setLoadingMessage(`Erro: ${error}. Tente novamente.`);
+    });
+
+    socket.on('auth_failure', (msg) => {
+      console.error('❌ Falha na autenticação:', msg);
+      setLoadingMessage('Falha na autenticação. Tente reconectar.');
+    });
+
+    socket.on('disconnected', () => {
+      console.log('⚠️ WhatsApp desconectado');
+      setLoadingMessage('Desconectado. Clique em "Tentar Novamente"');
+      setStatus({ isReady: false, qrCode: null, stats: {} });
+    });
+
+    socket.on('connect', () => {
+      console.log('✅ Conectado ao servidor');
+      setLoadingMessage('Conectado ao servidor. Aguardando WhatsApp...');
+    });
+
+    socket.on('disconnect', () => {
+      console.log('⚠️ Desconectado do servidor');
+      setLoadingMessage('Desconectado do servidor. Reconectando...');
+    });
+
+    return () => {
+      socket.off('qr');
+      socket.off('ready');
+      socket.off('message');
+      socket.off('loading');
+      socket.off('init_error');
+      socket.off('auth_failure');
+      socket.off('disconnected');
+      socket.off('connect');
+      socket.off('disconnect');
+    };
   }, []);
 
   const fetchStatus = async () => {
@@ -1319,7 +1367,15 @@ function App() {
             <div className="qr-section">
               <QrCode size={64} strokeWidth={2} />
               <h3>Aguardando QR Code...</h3>
-              <p>O código QR será exibido em alguns segundos</p>
+              <p>{loadingMessage}</p>
+              {loadingPercent > 0 && (
+                <div className="loading-bar">
+                  <div className="loading-progress" style={{ width: `${loadingPercent}%` }}></div>
+                  <span>{loadingPercent}%</span>
+                </div>
+              )}
+              <p className="loading-info">⏳ Isso pode levar 30-60 segundos na primeira vez</p>
+              <p className="loading-info">🔄 O Puppeteer está baixando o Chrome...</p>
               <button onClick={reconnect}>
                 🔄 Tentar Novamente
               </button>

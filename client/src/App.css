@@ -310,6 +310,42 @@ header h2 {
   box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
 }
 
+.loading-bar {
+  width: 100%;
+  max-width: 400px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  margin: 1rem 0;
+}
+
+.loading-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #a78bfa 0%, #c084fc 100%);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+}
+
+.loading-bar span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.loading-info {
+  font-size: 0.875rem !important;
+  color: rgba(167, 139, 250, 0.8) !important;
+  font-style: italic;
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

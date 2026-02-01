@@ -29,7 +29,9 @@ const stats = {
 
 // Inicializar cliente WhatsApp
 function initWhatsApp() {
-  // Configuração do Puppeteer para Render
+  console.log('🚀 Iniciando WhatsApp Client...');
+  
+  // Configuração do Puppeteer para Railway/Render
   const puppeteerConfig = {
     headless: true,
     args: [
@@ -40,14 +42,17 @@ function initWhatsApp() {
       '--no-first-run',
       '--no-zygote',
       '--disable-gpu',
-      '--single-process',
-      '--no-zygote'
-    ]
+      '--single-process'
+    ],
+    timeout: 60000 // 60 segundos de timeout
   };
 
-  // Usar Chromium do sistema se disponível (Render)
+  // Usar Chromium do sistema se disponível
   if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+    console.log('📦 Usando Chromium do sistema:', process.env.PUPPETEER_EXECUTABLE_PATH);
     puppeteerConfig.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+  } else {
+    console.log('📦 Puppeteer vai baixar Chrome automaticamente...');
   }
 
   client = new Client({
@@ -56,22 +61,23 @@ function initWhatsApp() {
   });
 
   client.on('qr', async (qr) => {
-    console.log('QR Code recebido!');
+    console.log('✅ QR Code recebido!');
     qrCode = await qrcode.toDataURL(qr);
-    console.log('QR Code convertido para base64');
+    console.log('✅ QR Code convertido para base64');
     io.emit('qr', qrCode);
   });
 
   client.on('authenticated', () => {
-    console.log('Cliente autenticado!');
+    console.log('✅ Cliente autenticado!');
   });
 
   client.on('auth_failure', (msg) => {
-    console.error('Falha na autenticação:', msg);
+    console.error('❌ Falha na autenticação:', msg);
+    io.emit('auth_failure', msg);
   });
 
   client.on('ready', async () => {
-    console.log('Cliente WhatsApp pronto!');
+    console.log('✅ Cliente WhatsApp pronto!');
     isReady = true;
     qrCode = null;
     io.emit('ready');
@@ -91,18 +97,23 @@ function initWhatsApp() {
   });
 
   client.on('disconnected', (reason) => {
-    console.log('Cliente desconectado:', reason);
+    console.log('⚠️ Cliente desconectado:', reason);
     isReady = false;
+    qrCode = null;
     io.emit('disconnected');
   });
 
   client.on('loading_screen', (percent, message) => {
-    console.log('Carregando...', percent, message);
+    console.log('⏳ Carregando...', percent, '%', message);
+    io.emit('loading', { percent, message });
   });
 
-  console.log('Inicializando cliente WhatsApp...');
+  console.log('⏳ Inicializando cliente WhatsApp...');
+  console.log('⚠️ Isso pode levar 30-60 segundos na primeira vez...');
+  
   client.initialize().catch(err => {
-    console.error('Erro ao inicializar:', err);
+    console.error('❌ Erro ao inicializar:', err);
+    io.emit('init_error', err.message);
   });
 }
 
