@@ -34,6 +34,7 @@ function initWhatsApp() {
   // Configuração do Puppeteer
   const puppeteerConfig = {
     headless: true,
+    executablePath: '/usr/bin/chromium', // Caminho fixo do Alpine
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
@@ -44,11 +45,7 @@ function initWhatsApp() {
     ]
   };
 
-  // Usar Chromium do sistema (Alpine Linux)
-  if (process.env.PUPPETEER_EXECUTABLE_PATH) {
-    puppeteerConfig.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
-    console.log('✅ Usando Chromium:', process.env.PUPPETEER_EXECUTABLE_PATH);
-  }
+  console.log('✅ Usando Chromium: /usr/bin/chromium');
 
   client = new Client({
     authStrategy: new LocalAuth(),
