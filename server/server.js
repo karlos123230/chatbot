@@ -313,10 +313,14 @@ app.get('/', (req, res) => {
 
         <div class="info">
           <strong>🎯 Frontend:</strong><br>
-          Acesse o painel em:<br>
-          <a href="https://whatsapp-pro-frontend.onrender.com" style="color: #60a5fa;">
-            whatsapp-pro-frontend.onrender.com
-          </a>
+          ${process.env.FRONTEND_URL ? `
+            Acesse o painel em:<br>
+            <a href="${process.env.FRONTEND_URL}" style="color: #60a5fa;">
+              ${process.env.FRONTEND_URL.replace('https://', '')}
+            </a>
+          ` : `
+            Deploy o frontend no Railway e configure a variável FRONTEND_URL
+          `}
           <br><br>
           <strong>📚 Documentação:</strong><br>
           Veja o README.md no GitHub para mais informações.

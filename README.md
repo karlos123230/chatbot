@@ -10,7 +10,8 @@ Sistema completo de gerenciamento de WhatsApp com funcionalidades avançadas de 
 
 - [Funcionalidades](#-funcionalidades)
 - [Tecnologias](#-tecnologias)
-- [Instalação](#-instalação)
+- [Deploy](#-deploy)
+- [Instalação Local](#-instalação-local)
 - [Como Usar](#-como-usar)
 - [Documentação](#-documentação)
 - [Screenshots](#-screenshots)
@@ -91,7 +92,41 @@ Sistema completo de gerenciamento de WhatsApp com funcionalidades avançadas de 
 - **CSS3** - Estilização (Glassmorphism)
 - **Socket.IO Client** - WebSocket
 
-## 📦 Instalação
+## 🚀 Deploy
+
+### Railway (Recomendado)
+
+O sistema está deployado no Railway:
+
+- **Backend**: https://whatsapp-pro-backend-production.up.railway.app
+- **Frontend**: https://whatsapp-pro-frontend-production.up.railway.app
+
+#### Fazer seu próprio deploy:
+
+1. **Deploy Rápido** - Veja: [DEPLOY-RAILWAY-RAPIDO.md](DEPLOY-RAILWAY-RAPIDO.md)
+2. **Guia Completo** - Veja: [DEPLOY-RAILWAY-COMPLETO.md](DEPLOY-RAILWAY-COMPLETO.md)
+
+#### Configuração Railway:
+
+**Backend:**
+```yaml
+Root Directory: server
+Build Command: npm install
+Start Command: node server.js
+Variables:
+  - FRONTEND_URL=https://seu-frontend.up.railway.app
+```
+
+**Frontend:**
+```yaml
+Root Directory: client
+Build Command: npm install && npm run build
+Start Command: npx serve -s dist -l $PORT
+Variables:
+  - VITE_API_URL=https://seu-backend.up.railway.app
+```
+
+## 📦 Instalação Local
 
 ### Pré-requisitos
 - Node.js >= 18.0.0
@@ -176,11 +211,20 @@ http://localhost:3000
 
 ## 📚 Documentação
 
+### Deploy
+- [Deploy Railway - Guia Rápido](DEPLOY-RAILWAY-RAPIDO.md)
+- [Deploy Railway - Guia Completo](DEPLOY-RAILWAY-COMPLETO.md)
+- [Deploy Frontend Railway](DEPLOY-FRONTEND-RAILWAY.md)
+
+### Funcionalidades
 - [Agendamento de Mensagens](AGENDAMENTO-PRONTO.md)
 - [Grupos e Listas](GRUPOS-IMPLEMENTADO.md)
 - [Auto-Resposta e Chatbot](AUTO-RESPOSTA-IMPLEMENTADO.md)
+
+### Suporte
 - [Sugestões de Melhorias](SUGESTOES-MELHORIAS.md)
 - [Troubleshooting](TROUBLESHOOTING.md)
+- [Como Reiniciar](COMO-REINICIAR.txt)
 
 ## 📸 Screenshots
 
