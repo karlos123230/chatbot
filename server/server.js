@@ -1076,7 +1076,17 @@ function calculateNextDate(currentDate, recurrence) {
 
 initWhatsApp();
 
-const PORT = 3001;
+// Health Check para Render
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'ok', 
+    whatsapp: isReady ? 'connected' : 'disconnected',
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString()
+  });
+});
+
+const PORT = process.env.PORT || 3001;
 httpServer.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
   console.log('Rotas disponíveis:');
