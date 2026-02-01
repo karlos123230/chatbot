@@ -12,7 +12,8 @@ RUN apk add --no-cache \
 
 # Definir variável de ambiente para Puppeteer usar Chromium
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
+    NODE_ENV=production
 
 # Criar diretório da aplicação
 WORKDIR /app
@@ -21,7 +22,7 @@ WORKDIR /app
 COPY server/package*.json ./
 
 # Instalar dependências
-RUN npm install --production
+RUN npm ci --only=production
 
 # Copiar código do servidor
 COPY server/ ./
@@ -29,5 +30,5 @@ COPY server/ ./
 # Expor porta
 EXPOSE 3001
 
-# Comando para iniciar
+# Comando para iniciar (sem cd)
 CMD ["node", "server.js"]
