@@ -34,7 +34,7 @@ function initWhatsApp() {
   // Configuração do Puppeteer
   const puppeteerConfig = {
     headless: true,
-    executablePath: '/usr/bin/chromium', // Caminho fixo do Alpine
+    executablePath: '/usr/bin/chromium-browser', // Symlink criado no Dockerfile
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
@@ -45,7 +45,7 @@ function initWhatsApp() {
     ]
   };
 
-  console.log('✅ Usando Chromium: /usr/bin/chromium');
+  console.log('✅ Usando Chromium: /usr/bin/chromium-browser (symlink)');
 
   client = new Client({
     authStrategy: new LocalAuth(),

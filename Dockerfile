@@ -8,11 +8,12 @@ RUN apk add --no-cache \
     freetype \
     harfbuzz \
     ca-certificates \
-    ttf-freefont
+    ttf-freefont \
+    && ln -s /usr/bin/chromium /usr/bin/chromium-browser
 
-# Definir variável de ambiente para Puppeteer usar Chromium
+# Definir variável de ambiente para Puppeteer
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
     NODE_ENV=production
 
 # Criar diretório da aplicação
