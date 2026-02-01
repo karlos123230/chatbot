@@ -8,8 +8,7 @@ RUN apk add --no-cache \
     freetype \
     harfbuzz \
     ca-certificates \
-    ttf-freefont \
-    && ln -s /usr/bin/chromium /usr/bin/chromium-browser
+    ttf-freefont
 
 # Definir variável de ambiente para Puppeteer
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
