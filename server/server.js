@@ -34,7 +34,6 @@ function initWhatsApp() {
   // Configuração do Puppeteer
   const puppeteerConfig = {
     headless: true,
-    executablePath: '/usr/bin/chromium-browser', // Symlink criado no Dockerfile
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
@@ -45,7 +44,14 @@ function initWhatsApp() {
     ]
   };
 
-  console.log('✅ Usando Chromium: /usr/bin/chromium-browser (symlink)');
+  // No Windows, deixar Puppeteer usar Chrome padrão
+  // No Linux/Docker, usar caminho específico
+  if (process.platform === 'linux' && process.env.PUPPETEER_EXECUTABLE_PATH) {
+    puppeteerConfig.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+    console.log('✅ Usando Chromium:', process.env.PUPPETEER_EXECUTABLE_PATH);
+  } else {
+    console.log('✅ Usando Chrome/Chromium padrão do sistema');
+  }
 
   client = new Client({
     authStrategy: new LocalAuth(),
