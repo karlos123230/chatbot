@@ -1540,7 +1540,7 @@ function App() {
                           <span className="message-author">{msg.author || 'Desconhecido'}</span>
                         )}
                         <div className="message-bubble">
-                          <p>{msg.body}</p>
+                          <p>{msg.body || msg.message || '[Mensagem sem conteúdo]'}</p>
                           <span className="message-time">
                             {new Date(msg.timestamp * 1000).toLocaleTimeString('pt-BR', { 
                               hour: '2-digit', 
