@@ -1994,7 +1994,8 @@ header h2 {
   }
   
   .finder-config-panel {
-    max-height: 400px;
+    max-height: none;
+    overflow: visible;
   }
 }
 
