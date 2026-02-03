@@ -1,0 +1,132 @@
+═══════════════════════════════════════════════════════════════
+🚀 INSTRUÇÕES SUPER SIMPLES - DEPLOY VPS HOSTINGER
+═══════════════════════════════════════════════════════════════
+
+📍 IP do VPS: 76.13.224.212
+
+═══════════════════════════════════════════════════════════════
+OPÇÃO 1: USAR O ARQUIVO .BAT (MAIS FÁCIL)
+═══════════════════════════════════════════════════════════════
+
+1. Localize o arquivo: deploy-vps.bat
+2. Clique duas vezes nele
+3. Digite a senha do VPS quando pedir
+4. Aguarde 10-15 minutos
+5. Acesse: http://76.13.224.212
+
+PRONTO! ✅
+
+═══════════════════════════════════════════════════════════════
+OPÇÃO 2: COPIAR E COLAR NO POWERSHELL
+═══════════════════════════════════════════════════════════════
+
+1. Abra o PowerShell (botão direito > Executar como Administrador)
+
+2. Copie e cole este comando (TUDO DE UMA VEZ):
+
+ssh root@76.13.224.212 "curl -o deploy.sh https://raw.githubusercontent.com/karlos123230/chatbot/main/deploy-hostinger.sh && chmod +x deploy.sh && ./deploy.sh"
+
+3. Digite a senha do VPS quando pedir
+
+4. Aguarde 10-15 minutos
+
+5. Acesse: http://76.13.224.212
+
+PRONTO! ✅
+
+═══════════════════════════════════════════════════════════════
+OPÇÃO 3: PASSO A PASSO MANUAL
+═══════════════════════════════════════════════════════════════
+
+1. Abra o PowerShell
+
+2. Conecte ao VPS:
+   ssh root@76.13.224.212
+
+3. Digite a senha
+
+4. Copie e cole (um por vez):
+
+curl -o deploy.sh https://raw.githubusercontent.com/karlos123230/chatbot/main/deploy-hostinger.sh
+
+chmod +x deploy.sh
+
+./deploy.sh
+
+5. Aguarde terminar
+
+6. Acesse: http://76.13.224.212
+
+PRONTO! ✅
+
+═══════════════════════════════════════════════════════════════
+O QUE O SCRIPT FAZ AUTOMATICAMENTE
+═══════════════════════════════════════════════════════════════
+
+✅ Atualiza o sistema
+✅ Instala Node.js 18
+✅ Instala Git
+✅ Instala PM2
+✅ Instala Chromium e dependências
+✅ Clona seu projeto do GitHub
+✅ Instala dependências do backend
+✅ Instala dependências do frontend
+✅ Cria arquivos .env
+✅ Faz build do frontend
+✅ Inicia backend com PM2
+✅ Instala e configura Nginx
+✅ Configura firewall
+
+═══════════════════════════════════════════════════════════════
+APÓS O DEPLOY
+═══════════════════════════════════════════════════════════════
+
+🌐 Acesse: http://76.13.224.212
+
+Você verá:
+✅ Sistema funcionando
+✅ QR Code para conectar WhatsApp
+✅ Dashboard com estatísticas
+✅ Todas as funcionalidades
+
+═══════════════════════════════════════════════════════════════
+COMANDOS ÚTEIS (APÓS CONECTAR NO VPS)
+═══════════════════════════════════════════════════════════════
+
+Ver logs:
+pm2 logs whatsapp-backend
+
+Ver status:
+pm2 status
+
+Reiniciar:
+pm2 restart whatsapp-backend
+
+Ver recursos:
+htop
+
+Sair do VPS:
+exit
+
+═══════════════════════════════════════════════════════════════
+SE DER ERRO
+═══════════════════════════════════════════════════════════════
+
+1. Conecte ao VPS:
+   ssh root@76.13.224.212
+
+2. Veja os logs:
+   pm2 logs whatsapp-backend
+
+3. Me envie o erro que aparecer
+
+═══════════════════════════════════════════════════════════════
+PRECISA DE AJUDA?
+═══════════════════════════════════════════════════════════════
+
+Me envie:
+- Print do erro
+- Logs do PM2
+- O que aconteceu
+
+═══════════════════════════════════════════════════════════════

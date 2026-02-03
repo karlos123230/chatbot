@@ -1,0 +1,133 @@
+═══════════════════════════════════════════════════════════════
+🚀 COMANDOS PARA EXECUTAR NO VPS HOSTINGER
+═══════════════════════════════════════════════════════════════
+
+📍 IP: 76.13.224.212
+
+═══════════════════════════════════════════════════════════════
+PASSO 1: CONECTAR AO VPS
+═══════════════════════════════════════════════════════════════
+
+Abra o PowerShell ou CMD e digite:
+
+ssh root@76.13.224.212
+
+Digite a senha quando solicitado.
+
+═══════════════════════════════════════════════════════════════
+PASSO 2: EXECUTAR SCRIPT AUTOMÁTICO
+═══════════════════════════════════════════════════════════════
+
+Copie e cole estes comandos um por vez:
+
+# 1. Baixar o script
+curl -o deploy.sh https://raw.githubusercontent.com/karlos123230/chatbot/main/deploy-hostinger.sh
+
+# 2. Dar permissão de execução
+chmod +x deploy.sh
+
+# 3. Executar o script
+./deploy.sh
+
+⏱️ Aguarde 10-15 minutos enquanto tudo é instalado automaticamente!
+
+═══════════════════════════════════════════════════════════════
+PASSO 3: VERIFICAR SE ESTÁ FUNCIONANDO
+═══════════════════════════════════════════════════════════════
+
+Após o script terminar, execute:
+
+# Ver status do backend
+pm2 status
+
+# Ver logs do backend
+pm2 logs whatsapp-backend
+
+# Testar API
+curl http://localhost:3001/api/status
+
+═══════════════════════════════════════════════════════════════
+PASSO 4: ACESSAR NO NAVEGADOR
+═══════════════════════════════════════════════════════════════
+
+Abra o navegador e acesse:
+
+http://76.13.224.212
+
+Você deve ver o sistema funcionando! 🎉
+
+═══════════════════════════════════════════════════════════════
+COMANDOS ÚTEIS
+═══════════════════════════════════════════════════════════════
+
+# Ver logs em tempo real
+pm2 logs whatsapp-backend
+
+# Reiniciar backend
+pm2 restart whatsapp-backend
+
+# Ver status
+pm2 status
+
+# Ver uso de recursos
+htop
+
+# Sair do htop
+Pressione Q
+
+# Reiniciar Nginx
+systemctl restart nginx
+
+# Ver logs do Nginx
+tail -f /var/log/nginx/error.log
+
+═══════════════════════════════════════════════════════════════
+SE DER ERRO
+═══════════════════════════════════════════════════════════════
+
+1. Ver logs do backend:
+   pm2 logs whatsapp-backend
+
+2. Verificar se porta está em uso:
+   netstat -tulpn | grep 3001
+
+3. Reiniciar tudo:
+   pm2 restart whatsapp-backend
+   systemctl restart nginx
+
+4. Verificar Nginx:
+   nginx -t
+   systemctl status nginx
+
+═══════════════════════════════════════════════════════════════
+ATUALIZAR SISTEMA (QUANDO FIZER MUDANÇAS NO CÓDIGO)
+═══════════════════════════════════════════════════════════════
+
+cd /root/chatbot
+git pull
+cd server
+npm install
+pm2 restart whatsapp-backend
+cd ../client
+npm install
+npm run build
+
+═══════════════════════════════════════════════════════════════
+DESCONECTAR DO VPS
+═══════════════════════════════════════════════════════════════
+
+exit
+
+═══════════════════════════════════════════════════════════════
+✅ CHECKLIST
+═══════════════════════════════════════════════════════════════
+
+[ ] Conectado ao VPS via SSH
+[ ] Script executado sem erros
+[ ] pm2 status mostra "online"
+[ ] curl http://localhost:3001/api/status retorna JSON
+[ ] http://76.13.224.212 abre no navegador
+[ ] QR Code aparece na tela
+[ ] WhatsApp conecta após escanear QR Code
+
+═══════════════════════════════════════════════════════════════

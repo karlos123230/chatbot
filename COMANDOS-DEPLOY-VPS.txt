@@ -1,0 +1,126 @@
+===========================================
+COMANDOS PARA EXECUTAR NO VPS HOSTINGER
+IP: 76.13.224.212
+===========================================
+
+PASSO 1: Atualizar código do GitHub
+-------------------------------------------
+cd /root/chatbot
+git stash
+git pull origin main
+
+
+PASSO 2: Atualizar frontend
+-------------------------------------------
+cd /root/chatbot/client
+npm install
+npm run build
+
+
+PASSO 3: Reiniciar backend
+-------------------------------------------
+cd /root/chatbot/server
+pm2 restart whatsapp-backend
+
+
+PASSO 4: Configurar Nginx na porta 8080
+-------------------------------------------
+# Criar arquivo de configuração
+cat > /etc/nginx/conf.d/whatsapp.conf << 'EOF'
+server {
+    listen 8080;
+    server_name 76.13.224.212;
+
+    root /root/chatbot/client/dist;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api {
+        proxy_pass http://localhost:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /socket.io {
+        proxy_pass http://localhost:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    access_log /var/log/nginx/whatsapp_access.log;
+    error_log /var/log/nginx/whatsapp_error.log;
+}
+EOF
+
+
+PASSO 5: Testar e reiniciar Nginx
+-------------------------------------------
+nginx -t
+systemctl restart nginx
+
+
+PASSO 6: Verificar se está funcionando
+-------------------------------------------
+# Ver status do backend
+pm2 status
+
+# Ver logs do backend
+pm2 logs whatsapp-backend --lines 50
+
+# Testar API
+curl http://localhost:3001/api/status
+
+# Testar frontend
+curl http://localhost:8080
+
+
+PASSO 7: Abrir firewall para porta 8080
+-------------------------------------------
+firewall-cmd --permanent --add-port=8080/tcp
+firewall-cmd --reload
+
+# OU se usar ufw:
+ufw allow 8080/tcp
+
+
+===========================================
+VERIFICAÇÃO FINAL
+===========================================
+
+1. Backend rodando: pm2 status
+2. Nginx rodando: systemctl status nginx
+3. Acessar no navegador: http://76.13.224.212:8080
+
+===========================================
+COMANDOS ÚTEIS
+===========================================
+
+# Ver logs do backend em tempo real
+pm2 logs whatsapp-backend
+
+# Ver logs do Nginx
+tail -f /var/log/nginx/whatsapp_error.log
+
+# Reiniciar tudo
+pm2 restart whatsapp-backend
+systemctl restart nginx
+
+# Ver processos na porta 8080
+netstat -tulpn | grep 8080
+
+# Ver processos na porta 3001
+netstat -tulpn | grep 3001

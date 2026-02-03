@@ -1664,7 +1664,218 @@ header h2 {
 }
 
 
-/* Finder Container */
+/* ==================== FINDER (NOVA ESTRUTURA) ==================== */
+
+.finder-container-new {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.finder-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.finder-title h2 {
+  color: #e5e7eb;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.finder-subtitle {
+  color: #9ca3af;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.finder-form-card {
+  background: rgba(139, 92, 246, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.finder-form-card .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.finder-form-card .form-group:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.finder-form-card label {
+  display: block;
+  color: #e5e7eb;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.finder-form-card select,
+.finder-form-card input[type="number"],
+.finder-form-card input[type="text"] {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(17, 24, 39, 0.6);
+  border: 2px solid rgba(139, 92, 246, 0.3);
+  border-radius: 12px;
+  color: #e5e7eb;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.finder-form-card select:focus,
+.finder-form-card input:focus {
+  outline: none;
+  border-color: rgba(139, 92, 246, 0.6);
+  background: rgba(17, 24, 39, 0.8);
+}
+
+.finder-form-card select:disabled,
+.finder-form-card input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.finder-form-card .ddd-display {
+  background: rgba(17, 24, 39, 0.4);
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.finder-form-card small {
+  display: block;
+  color: #9ca3af;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.btn-generate {
+  width: 100%;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(5, 150, 105, 0.2) 100%);
+  border: 2px solid rgba(16, 185, 129, 0.4);
+  border-radius: 12px;
+  color: #10b981;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-generate:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(5, 150, 105, 0.3) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+.btn-generate:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.finder-results-card {
+  background: rgba(139, 92, 246, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.finder-results-card .results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.finder-results-card .results-header h3 {
+  color: #e5e7eb;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.results-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.numbers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.number-item {
+  background: rgba(17, 24, 39, 0.6);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.number-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.number-value {
+  color: #e5e7eb;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.number-name {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+/* Responsividade para Finder Nova Estrutura */
+@media (max-width: 768px) {
+  .finder-container-new {
+    padding: 1rem 0.5rem;
+  }
+
+  .finder-title h2 {
+    font-size: 1.5rem;
+  }
+
+  .finder-form-card {
+    padding: 1.5rem;
+  }
+
+  .finder-results-card {
+    padding: 1.5rem;
+  }
+
+  .finder-results-card .results-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .results-actions {
+    width: 100%;
+  }
+
+  .results-actions button {
+    flex: 1;
+  }
+}
+
+/* ==================== FIM FINDER NOVA ESTRUTURA ==================== */
+
+/* Finder Container (ANTIGO - MANTER PARA COMPATIBILIDADE) */
 .finder-container {
   display: grid;
   grid-template-columns: 400px 1fr;

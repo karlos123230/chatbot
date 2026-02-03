@@ -28,7 +28,9 @@ function App() {
   const [selectedTemplate, setSelectedTemplate] = useState('');
   const [showTemplates, setShowTemplates] = useState(false);
   const [finderState, setFinderState] = useState('');
-  const [finderQuantity, setFinderQuantity] = useState(10);
+  const [finderCity, setFinderCity] = useState('');
+  const [finderDDD, setFinderDDD] = useState('');
+  const [finderQuantity, setFinderQuantity] = useState(50);
   const [foundNumbers, setFoundNumbers] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [searchProgress, setSearchProgress] = useState(0);
@@ -107,126 +109,210 @@ function App() {
     { id: 6, name: 'Despedida', text: 'Tenha um ótimo dia! Qualquer dúvida, estou à disposição. 👋' }
   ];
 
-  const brazilianStates = [
-    // São Paulo
-    { code: '11', name: 'São Paulo - SP (Capital e Região Metropolitana)', ddd: '11' },
-    { code: '12', name: 'São Paulo - SP (Vale do Paraíba e Litoral Norte)', ddd: '12' },
-    { code: '13', name: 'São Paulo - SP (Baixada Santista)', ddd: '13' },
-    { code: '14', name: 'São Paulo - SP (Bauru e Região)', ddd: '14' },
-    { code: '15', name: 'São Paulo - SP (Sorocaba e Região)', ddd: '15' },
-    { code: '16', name: 'São Paulo - SP (Ribeirão Preto e Região)', ddd: '16' },
-    { code: '17', name: 'São Paulo - SP (São José do Rio Preto e Região)', ddd: '17' },
-    { code: '18', name: 'São Paulo - SP (Presidente Prudente e Região)', ddd: '18' },
-    { code: '19', name: 'São Paulo - SP (Campinas e Região)', ddd: '19' },
-    
-    // Rio de Janeiro
-    { code: '21', name: 'Rio de Janeiro - RJ (Capital e Região Metropolitana)', ddd: '21' },
-    { code: '22', name: 'Rio de Janeiro - RJ (Campos dos Goytacazes e Região)', ddd: '22' },
-    { code: '24', name: 'Rio de Janeiro - RJ (Volta Redonda, Petrópolis e Região)', ddd: '24' },
-    
-    // Espírito Santo
-    { code: '27', name: 'Espírito Santo - ES (Vitória e Região Metropolitana)', ddd: '27' },
-    { code: '28', name: 'Espírito Santo - ES (Cachoeiro de Itapemirim e Sul)', ddd: '28' },
-    
-    // Minas Gerais
-    { code: '31', name: 'Minas Gerais - MG (Belo Horizonte e Região Metropolitana)', ddd: '31' },
-    { code: '32', name: 'Minas Gerais - MG (Juiz de Fora e Zona da Mata)', ddd: '32' },
-    { code: '33', name: 'Minas Gerais - MG (Governador Valadares e Vale do Rio Doce)', ddd: '33' },
-    { code: '34', name: 'Minas Gerais - MG (Uberlândia e Triângulo Mineiro)', ddd: '34' },
-    { code: '35', name: 'Minas Gerais - MG (Poços de Caldas e Sul de Minas)', ddd: '35' },
-    { code: '37', name: 'Minas Gerais - MG (Divinópolis e Centro-Oeste)', ddd: '37' },
-    { code: '38', name: 'Minas Gerais - MG (Montes Claros e Norte)', ddd: '38' },
-    
-    // Paraná
-    { code: '41', name: 'Paraná - PR (Curitiba e Região Metropolitana)', ddd: '41' },
-    { code: '42', name: 'Paraná - PR (Ponta Grossa e Região)', ddd: '42' },
-    { code: '43', name: 'Paraná - PR (Londrina e Norte)', ddd: '43' },
-    { code: '44', name: 'Paraná - PR (Maringá e Noroeste)', ddd: '44' },
-    { code: '45', name: 'Paraná - PR (Foz do Iguaçu e Oeste)', ddd: '45' },
-    { code: '46', name: 'Paraná - PR (Francisco Beltrão e Sudoeste)', ddd: '46' },
-    
-    // Santa Catarina
-    { code: '47', name: 'Santa Catarina - SC (Joinville, Blumenau e Norte)', ddd: '47' },
-    { code: '48', name: 'Santa Catarina - SC (Florianópolis e Grande Florianópolis)', ddd: '48' },
-    { code: '49', name: 'Santa Catarina - SC (Chapecó e Oeste)', ddd: '49' },
-    
-    // Rio Grande do Sul
-    { code: '51', name: 'Rio Grande do Sul - RS (Porto Alegre e Região Metropolitana)', ddd: '51' },
-    { code: '53', name: 'Rio Grande do Sul - RS (Pelotas e Sul)', ddd: '53' },
-    { code: '54', name: 'Rio Grande do Sul - RS (Caxias do Sul e Serra)', ddd: '54' },
-    { code: '55', name: 'Rio Grande do Sul - RS (Santa Maria e Região Central)', ddd: '55' },
-    
-    // Distrito Federal e Goiás
-    { code: '61', name: 'Distrito Federal - DF (Brasília e Entorno)', ddd: '61' },
-    { code: '62', name: 'Goiás - GO (Goiânia e Região Metropolitana)', ddd: '62' },
-    { code: '64', name: 'Goiás - GO (Rio Verde e Sudoeste)', ddd: '64' },
-    
-    // Tocantins
-    { code: '63', name: 'Tocantins - TO (Todo o Estado)', ddd: '63' },
-    
-    // Mato Grosso
-    { code: '65', name: 'Mato Grosso - MT (Cuiabá e Região)', ddd: '65' },
-    { code: '66', name: 'Mato Grosso - MT (Rondonópolis e Sul)', ddd: '66' },
-    
-    // Mato Grosso do Sul
-    { code: '67', name: 'Mato Grosso do Sul - MS (Todo o Estado)', ddd: '67' },
-    
-    // Acre
-    { code: '68', name: 'Acre - AC (Todo o Estado)', ddd: '68' },
-    
-    // Rondônia
-    { code: '69', name: 'Rondônia - RO (Todo o Estado)', ddd: '69' },
-    
-    // Bahia
-    { code: '71', name: 'Bahia - BA (Salvador e Região Metropolitana)', ddd: '71' },
-    { code: '73', name: 'Bahia - BA (Ilhéus e Sul)', ddd: '73' },
-    { code: '74', name: 'Bahia - BA (Juazeiro e Norte)', ddd: '74' },
-    { code: '75', name: 'Bahia - BA (Feira de Santana e Região)', ddd: '75' },
-    { code: '77', name: 'Bahia - BA (Vitória da Conquista e Sudoeste)', ddd: '77' },
-    
-    // Sergipe
-    { code: '79', name: 'Sergipe - SE (Todo o Estado)', ddd: '79' },
-    
-    // Pernambuco
-    { code: '81', name: 'Pernambuco - PE (Recife e Região Metropolitana)', ddd: '81' },
-    { code: '87', name: 'Pernambuco - PE (Petrolina e Sertão)', ddd: '87' },
-    
-    // Alagoas
-    { code: '82', name: 'Alagoas - AL (Todo o Estado)', ddd: '82' },
-    
-    // Paraíba
-    { code: '83', name: 'Paraíba - PB (Todo o Estado)', ddd: '83' },
-    
-    // Rio Grande do Norte
-    { code: '84', name: 'Rio Grande do Norte - RN (Todo o Estado)', ddd: '84' },
-    
-    // Ceará
-    { code: '85', name: 'Ceará - CE (Fortaleza e Região Metropolitana)', ddd: '85' },
-    { code: '88', name: 'Ceará - CE (Juazeiro do Norte e Sul)', ddd: '88' },
-    
-    // Piauí
-    { code: '86', name: 'Piauí - PI (Teresina e Região)', ddd: '86' },
-    { code: '89', name: 'Piauí - PI (Picos e Sul)', ddd: '89' },
-    
-    // Pará
-    { code: '91', name: 'Pará - PA (Belém e Região Metropolitana)', ddd: '91' },
-    { code: '93', name: 'Pará - PA (Santarém e Oeste)', ddd: '93' },
-    { code: '94', name: 'Pará - PA (Marabá e Sul)', ddd: '94' },
-    
-    // Amazonas
-    { code: '92', name: 'Amazonas - AM (Manaus e Região Metropolitana)', ddd: '92' },
-    { code: '97', name: 'Amazonas - AM (Interior)', ddd: '97' },
-    
-    // Roraima
-    { code: '95', name: 'Roraima - RR (Todo o Estado)', ddd: '95' },
-    
-    // Amapá
-    { code: '96', name: 'Amapá - AP (Todo o Estado)', ddd: '96' },
-    
-    // Maranhão
-    { code: '98', name: 'Maranhão - MA (São Luís e Região Metropolitana)', ddd: '98' },
-    { code: '99', name: 'Maranhão - MA (Imperatriz e Sul)', ddd: '99' }
-  ];
+  const brazilianStates = {
+    'SP': {
+      name: 'São Paulo',
+      cities: {
+        'São Paulo': { ddd: '11', name: 'São Paulo (Capital e Região Metropolitana)' },
+        'Vale do Paraíba': { ddd: '12', name: 'Vale do Paraíba e Litoral Norte' },
+        'Santos': { ddd: '13', name: 'Baixada Santista' },
+        'Bauru': { ddd: '14', name: 'Bauru e Região' },
+        'Sorocaba': { ddd: '15', name: 'Sorocaba e Região' },
+        'Ribeirão Preto': { ddd: '16', name: 'Ribeirão Preto e Região' },
+        'São José do Rio Preto': { ddd: '17', name: 'São José do Rio Preto e Região' },
+        'Presidente Prudente': { ddd: '18', name: 'Presidente Prudente e Região' },
+        'Campinas': { ddd: '19', name: 'Campinas e Região' }
+      }
+    },
+    'RJ': {
+      name: 'Rio de Janeiro',
+      cities: {
+        'Rio de Janeiro': { ddd: '21', name: 'Rio de Janeiro (Capital e Região Metropolitana)' },
+        'Campos dos Goytacazes': { ddd: '22', name: 'Campos dos Goytacazes e Região' },
+        'Volta Redonda': { ddd: '24', name: 'Volta Redonda, Petrópolis e Região' }
+      }
+    },
+    'ES': {
+      name: 'Espírito Santo',
+      cities: {
+        'Vitória': { ddd: '27', name: 'Vitória e Região Metropolitana' },
+        'Cachoeiro de Itapemirim': { ddd: '28', name: 'Cachoeiro de Itapemirim e Sul' }
+      }
+    },
+    'MG': {
+      name: 'Minas Gerais',
+      cities: {
+        'Belo Horizonte': { ddd: '31', name: 'Belo Horizonte e Região Metropolitana' },
+        'Juiz de Fora': { ddd: '32', name: 'Juiz de Fora e Zona da Mata' },
+        'Governador Valadares': { ddd: '33', name: 'Governador Valadares e Vale do Rio Doce' },
+        'Uberlândia': { ddd: '34', name: 'Uberlândia e Triângulo Mineiro' },
+        'Poços de Caldas': { ddd: '35', name: 'Poços de Caldas e Sul de Minas' },
+        'Divinópolis': { ddd: '37', name: 'Divinópolis e Centro-Oeste' },
+        'Montes Claros': { ddd: '38', name: 'Montes Claros e Norte' }
+      }
+    },
+    'PR': {
+      name: 'Paraná',
+      cities: {
+        'Curitiba': { ddd: '41', name: 'Curitiba e Região Metropolitana' },
+        'Ponta Grossa': { ddd: '42', name: 'Ponta Grossa e Região' },
+        'Londrina': { ddd: '43', name: 'Londrina e Norte' },
+        'Maringá': { ddd: '44', name: 'Maringá e Noroeste' },
+        'Foz do Iguaçu': { ddd: '45', name: 'Foz do Iguaçu e Oeste' },
+        'Francisco Beltrão': { ddd: '46', name: 'Francisco Beltrão e Sudoeste' }
+      }
+    },
+    'SC': {
+      name: 'Santa Catarina',
+      cities: {
+        'Joinville': { ddd: '47', name: 'Joinville, Blumenau e Norte' },
+        'Florianópolis': { ddd: '48', name: 'Florianópolis e Grande Florianópolis' },
+        'Chapecó': { ddd: '49', name: 'Chapecó e Oeste' }
+      }
+    },
+    'RS': {
+      name: 'Rio Grande do Sul',
+      cities: {
+        'Porto Alegre': { ddd: '51', name: 'Porto Alegre e Região Metropolitana' },
+        'Pelotas': { ddd: '53', name: 'Pelotas e Sul' },
+        'Caxias do Sul': { ddd: '54', name: 'Caxias do Sul e Serra' },
+        'Santa Maria': { ddd: '55', name: 'Santa Maria e Região Central' }
+      }
+    },
+    'DF': {
+      name: 'Distrito Federal',
+      cities: {
+        'Brasília': { ddd: '61', name: 'Brasília e Entorno' }
+      }
+    },
+    'GO': {
+      name: 'Goiás',
+      cities: {
+        'Goiânia': { ddd: '62', name: 'Goiânia e Região Metropolitana' },
+        'Rio Verde': { ddd: '64', name: 'Rio Verde e Sudoeste' }
+      }
+    },
+    'TO': {
+      name: 'Tocantins',
+      cities: {
+        'Palmas': { ddd: '63', name: 'Todo o Estado' }
+      }
+    },
+    'MT': {
+      name: 'Mato Grosso',
+      cities: {
+        'Cuiabá': { ddd: '65', name: 'Cuiabá e Região' },
+        'Rondonópolis': { ddd: '66', name: 'Rondonópolis e Sul' }
+      }
+    },
+    'MS': {
+      name: 'Mato Grosso do Sul',
+      cities: {
+        'Campo Grande': { ddd: '67', name: 'Todo o Estado' }
+      }
+    },
+    'AC': {
+      name: 'Acre',
+      cities: {
+        'Rio Branco': { ddd: '68', name: 'Todo o Estado' }
+      }
+    },
+    'RO': {
+      name: 'Rondônia',
+      cities: {
+        'Porto Velho': { ddd: '69', name: 'Todo o Estado' }
+      }
+    },
+    'BA': {
+      name: 'Bahia',
+      cities: {
+        'Salvador': { ddd: '71', name: 'Salvador e Região Metropolitana' },
+        'Ilhéus': { ddd: '73', name: 'Ilhéus e Sul' },
+        'Juazeiro': { ddd: '74', name: 'Juazeiro e Norte' },
+        'Feira de Santana': { ddd: '75', name: 'Feira de Santana e Região' },
+        'Vitória da Conquista': { ddd: '77', name: 'Vitória da Conquista e Sudoeste' }
+      }
+    },
+    'SE': {
+      name: 'Sergipe',
+      cities: {
+        'Aracaju': { ddd: '79', name: 'Todo o Estado' }
+      }
+    },
+    'PE': {
+      name: 'Pernambuco',
+      cities: {
+        'Recife': { ddd: '81', name: 'Recife e Região Metropolitana' },
+        'Petrolina': { ddd: '87', name: 'Petrolina e Sertão' }
+      }
+    },
+    'AL': {
+      name: 'Alagoas',
+      cities: {
+        'Maceió': { ddd: '82', name: 'Todo o Estado' }
+      }
+    },
+    'PB': {
+      name: 'Paraíba',
+      cities: {
+        'João Pessoa': { ddd: '83', name: 'Todo o Estado' }
+      }
+    },
+    'RN': {
+      name: 'Rio Grande do Norte',
+      cities: {
+        'Natal': { ddd: '84', name: 'Todo o Estado' }
+      }
+    },
+    'CE': {
+      name: 'Ceará',
+      cities: {
+        'Fortaleza': { ddd: '85', name: 'Fortaleza e Região Metropolitana' },
+        'Juazeiro do Norte': { ddd: '88', name: 'Juazeiro do Norte e Sul' }
+      }
+    },
+    'PI': {
+      name: 'Piauí',
+      cities: {
+        'Teresina': { ddd: '86', name: 'Teresina e Região' },
+        'Picos': { ddd: '89', name: 'Picos e Sul' }
+      }
+    },
+    'PA': {
+      name: 'Pará',
+      cities: {
+        'Belém': { ddd: '91', name: 'Belém e Região Metropolitana' },
+        'Santarém': { ddd: '93', name: 'Santarém e Oeste' },
+        'Marabá': { ddd: '94', name: 'Marabá e Sul' }
+      }
+    },
+    'AM': {
+      name: 'Amazonas',
+      cities: {
+        'Manaus': { ddd: '92', name: 'Manaus e Região Metropolitana' },
+        'Interior': { ddd: '97', name: 'Interior do Amazonas' }
+      }
+    },
+    'RR': {
+      name: 'Roraima',
+      cities: {
+        'Boa Vista': { ddd: '95', name: 'Todo o Estado' }
+      }
+    },
+    'AP': {
+      name: 'Amapá',
+      cities: {
+        'Macapá': { ddd: '96', name: 'Todo o Estado' }
+      }
+    },
+    'MA': {
+      name: 'Maranhão',
+      cities: {
+        'São Luís': { ddd: '98', name: 'São Luís e Região Metropolitana' },
+        'Imperatriz': { ddd: '99', name: 'Imperatriz e Sul' }
+      }
+    }
+  };
 
   useEffect(() => {
     fetchStatus();
@@ -382,8 +468,8 @@ function App() {
   };
 
   const startNumberFinder = async () => {
-    if (!finderState || finderQuantity < 1) {
-      alert('⚠️ Selecione um estado e quantidade válida!');
+    if (!finderDDD || finderQuantity < 1) {
+      alert('⚠️ Selecione um DDD e quantidade válida!');
       return;
     }
 
@@ -391,14 +477,14 @@ function App() {
     setFoundNumbers([]);
     setSearchProgress(0);
 
-    console.log(`🔍 Iniciando busca: DDD ${finderState}, Quantidade: ${finderQuantity}`);
+    console.log(`🔍 Iniciando busca: DDD ${finderDDD}, Quantidade: ${finderQuantity}`);
 
     try {
       const response = await fetch(`${API_URL}/api/find-numbers`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          ddd: finderState, 
+          ddd: finderDDD, 
           quantity: finderQuantity 
         })
       });
@@ -484,8 +570,13 @@ function App() {
     const timeStr = now.toLocaleTimeString('pt-BR').replace(/:/g, '-');
     
     // Encontrar o nome da localidade
-    const localidade = brazilianStates.find(state => state.ddd === finderState);
-    const localidadeNome = localidade ? localidade.name : `DDD ${finderState}`;
+    let localidadeNome = `DDD ${finderDDD}`;
+    if (finderState && finderCity) {
+      const stateData = brazilianStates[finderState];
+      if (stateData && stateData.cities[finderCity]) {
+        localidadeNome = `${finderCity} - ${stateData.name}`;
+      }
+    }
     
     // Criar cabeçalho
     let content = '';
@@ -504,7 +595,7 @@ function App() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `WhatsApp-${foundNumbers.length}-Numeros-${localidadeNome.split(' ')[0]}-${dateStr}.txt`;
+    a.download = `WhatsApp-${foundNumbers.length}-Numeros-DDD${finderDDD}-${dateStr}.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -1836,168 +1927,206 @@ function App() {
           )}
 
           {activeTab === 'finder' && status.isReady && (
-            <div className="finder-container">
-              <div className="finder-config-panel">
-                <div className="finder-card">
-                  <h3>🔍 Configuração da Busca</h3>
-                  
-                  <div className="form-group">
-                    <label>📍 Estado / Região (DDD)</label>
-                    <select 
-                      value={finderState} 
-                      onChange={(e) => setFinderState(e.target.value)}
-                      disabled={isSearching}
-                    >
-                      <option value="">Selecione um estado...</option>
-                      {brazilianStates.map(state => (
-                        <option key={state.code} value={state.ddd}>
-                          {state.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="form-group">
-                    <label>🔢 Quantidade de Números</label>
-                    <input 
-                      type="number" 
-                      min="1" 
-                      max="100"
-                      value={finderQuantity}
-                      onChange={(e) => setFinderQuantity(parseInt(e.target.value) || 1)}
-                      disabled={isSearching}
-                    />
-                    <small>Máximo: 100 números por busca</small>
-                  </div>
-
-                  <div className="finder-info">
-                    <p>ℹ️ <strong>Como funciona:</strong></p>
-                    <ul>
-                      <li>✓ Usa contatos existentes como base</li>
-                      <li>✓ Gera variações de números reais</li>
-                      <li>✓ Verifica automaticamente se tem WhatsApp</li>
-                      <li>✓ Retorna apenas números ativos</li>
-                      <li>✓ Mostra nome do contato quando disponível</li>
-                    </ul>
-                    <small style={{color: '#9ca3af', marginTop: '0.5rem', display: 'block'}}>
-                      💡 Dica: Quanto mais contatos você tiver do DDD selecionado, melhores serão os resultados
-                    </small>
-                  </div>
-
-                  <button 
-                    className="btn-primary"
-                    onClick={startNumberFinder}
-                    disabled={isSearching || !finderState}
-                  >
-                    {isSearching ? '🔄 Buscando...' : '🚀 Iniciar Buscas'}
-                  </button>
-
-                  {isSearching && (
-                    <div className="progress-section">
-                      <div className="progress-stats">
-                        <span>✅ Encontrados: {foundNumbers.length}/{finderQuantity}</span>
-                        <span>⏱️ Progresso: {searchProgress}%</span>
-                      </div>
-                      <div className="progress-bar">
-                        <div className="progress-fill" style={{ width: `${searchProgress}%` }}></div>
-                      </div>
-                    </div>
-                  )}
+            <div className="finder-container-new">
+              <div className="finder-header">
+                <div className="finder-title">
+                  <h2>📱 Gerador de Números WhatsApp Ativos</h2>
+                  <p className="finder-subtitle">Gera e valida apenas números do WhatsApp que estão ativos</p>
                 </div>
               </div>
 
-              <div className="finder-results-panel">
-                <div className="results-header">
-                  <h3>📋 Números Encontrados ({foundNumbers.length})</h3>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    {foundNumbers.length > 0 && (
-                      <>
-                        <button className="export-btn" onClick={exportNumbers}>
-                          💾 Exportar
-                        </button>
-                        <button 
-                          className="mass-send-btn" 
-                          onClick={() => {
-                            setShowMassMessage(true);
-                            setMassQuantity(foundNumbers.length);
-                          }}
-                        >
-                          📤 Envio em Massa
-                        </button>
-                        {groupsList.length > 0 && (
-                          <select 
-                            className="group-select-btn"
-                            onChange={(e) => {
-                              if (e.target.value) {
-                                const group = groupsList.find(g => g.id === parseInt(e.target.value));
-                                setSelectedGroup(group);
-                                addFoundNumbersToGroup();
-                                e.target.value = '';
-                              }
-                            }}
-                          >
-                            <option value="">➕ Adicionar ao Grupo</option>
-                            {groupsList.map(g => (
-                              <option key={g.id} value={g.id}>{g.name}</option>
-                            ))}
-                          </select>
-                        )}
-                      </>
-                    )}
-                  </div>
+              <div className="finder-form-card">
+                <div className="form-group">
+                  <label>📍 Estado</label>
+                  <select 
+                    value={finderState} 
+                    onChange={(e) => {
+                      setFinderState(e.target.value);
+                      setFinderCity('');
+                      setFinderDDD('');
+                    }}
+                    disabled={isSearching}
+                  >
+                    <option value="">Selecione o estado</option>
+                    {Object.keys(brazilianStates).sort().map(stateCode => (
+                      <option key={stateCode} value={stateCode}>
+                        {brazilianStates[stateCode].name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
-                {showMassMessage && (
-                  <div className="mass-message-panel">
-                    <div className="mass-message-header">
-                      <h4>📤 Envio em Massa</h4>
+                <div className="form-group">
+                  <label>🏙️ Cidade</label>
+                  <select 
+                    value={finderCity} 
+                    onChange={(e) => {
+                      setFinderCity(e.target.value);
+                      if (e.target.value && finderState) {
+                        const cityData = brazilianStates[finderState].cities[e.target.value];
+                        setFinderDDD(cityData.ddd);
+                      } else {
+                        setFinderDDD('');
+                      }
+                    }}
+                    disabled={isSearching || !finderState}
+                  >
+                    <option value="">
+                      {finderState ? 'Primeiro selecione o estado' : 'Selecione a cidade'}
+                    </option>
+                    {finderState && Object.keys(brazilianStates[finderState].cities).map(cityName => (
+                      <option key={cityName} value={cityName}>
+                        {brazilianStates[finderState].cities[cityName].name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label>📞 DDD</label>
+                  <input 
+                    type="text" 
+                    value={finderDDD ? `(${finderDDD})` : 'Auto (baseado na cidade)'}
+                    disabled
+                    className="ddd-display"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>🔢 Quantidade de Números Ativos</label>
+                  <input 
+                    type="number" 
+                    min="1" 
+                    max="100"
+                    value={finderQuantity}
+                    onChange={(e) => setFinderQuantity(parseInt(e.target.value) || 1)}
+                    disabled={isSearching}
+                  />
+                  <small>Serão gerados apenas números validados e ativos no WhatsApp</small>
+                </div>
+
+                <button 
+                  className="btn-generate"
+                  onClick={startNumberFinder}
+                  disabled={isSearching || !finderDDD}
+                >
+                  {isSearching ? '🔄 Gerando Números...' : '🔄 Gerar Números Ativos'}
+                </button>
+
+                {isSearching && (
+                  <div className="progress-section">
+                    <div className="progress-stats">
+                      <span>✅ Encontrados: {foundNumbers.length}/{finderQuantity}</span>
+                      <span>⏱️ Progresso: {searchProgress}%</span>
+                    </div>
+                    <div className="progress-bar">
+                      <div className="progress-fill" style={{ width: `${searchProgress}%` }}></div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {foundNumbers.length > 0 && (
+                <div className="finder-results-card">
+                  <div className="results-header">
+                    <h3>📋 Números Encontrados ({foundNumbers.length})</h3>
+                    <div className="results-actions">
+                      <button className="export-btn" onClick={exportNumbers}>
+                        💾 Exportar
+                      </button>
                       <button 
-                        className="close-btn"
-                        onClick={() => setShowMassMessage(false)}
+                        className="mass-send-btn" 
+                        onClick={() => {
+                          setShowMassMessage(true);
+                          setMassQuantity(foundNumbers.length);
+                        }}
                       >
-                        ✕
+                        📤 Envio em Massa
                       </button>
                     </div>
+                  </div>
 
-                    <div className="form-group">
-                      <label>📊 Quantidade de Números</label>
-                      <input 
-                        type="number" 
-                        min="1" 
-                        max={foundNumbers.length}
-                        value={massQuantity}
-                        onChange={(e) => setMassQuantity(Math.min(parseInt(e.target.value) || 1, foundNumbers.length))}
-                        disabled={isSendingMass}
-                      />
-                      <small>Máximo: {foundNumbers.length} números encontrados</small>
-                    </div>
-
-                    <div className="form-group">
-                      <label>✍️ Mensagem</label>
-                      <textarea
-                        placeholder="Digite a mensagem que será enviada para todos..."
-                        value={massMessage}
-                        onChange={(e) => setMassMessage(e.target.value)}
-                        rows={6}
-                        disabled={isSendingMass}
-                      />
-                      <small>⏱️ Delay de 60 segundos entre cada envio</small>
-                    </div>
-
-                    {isSendingMass && (
-                      <div className="progress-section">
-                        <div className="progress-stats">
-                          <span>{massSendStatus}</span>
-                        </div>
-                        <div className="progress-bar">
-                          <div className="progress-fill" style={{ width: `${massSendProgress}%` }}></div>
+                  <div className="numbers-list">
+                    {foundNumbers.map((num, index) => (
+                      <div key={index} className="number-item">
+                        <div className="number-info">
+                          <span className="number-value">📱 {num.number.replace('@c.us', '')}</span>
+                          {num.name && <span className="number-name">👤 {num.name}</span>}
                         </div>
                       </div>
-                    )}
+                    ))}
+                  </div>
+                </div>
+              )}
 
-                    <div className="mass-actions">
-                      <button 
-                        className="btn-secondary"
+              {showMassMessage && (
+                <div className="mass-message-panel">
+                  <div className="mass-message-header">
+                    <h4>📤 Envio em Massa</h4>
+                    <button 
+                      className="close-btn"
+                      onClick={() => setShowMassMessage(false)}
+                    >
+                      ✕
+                    </button>
+                  </div>
+
+                  <div className="form-group">
+                    <label>📊 Quantidade de Números</label>
+                    <input 
+                      type="number" 
+                      min="1" 
+                      max={foundNumbers.length}
+                      value={massQuantity}
+                      onChange={(e) => setMassQuantity(Math.min(parseInt(e.target.value) || 1, foundNumbers.length))}
+                      disabled={isSendingMass}
+                    />
+                    <small>Máximo: {foundNumbers.length} números encontrados</small>
+                  </div>
+
+                  <div className="form-group">
+                    <label>✍️ Mensagem</label>
+                    <textarea
+                      placeholder="Digite a mensagem que será enviada para todos..."
+                      value={massMessage}
+                      onChange={(e) => setMassMessage(e.target.value)}
+                      rows={6}
+                      disabled={isSendingMass}
+                    />
+                    <small>⏱️ Delay de 60 segundos entre cada envio</small>
+                  </div>
+
+                  {isSendingMass && (
+                    <div className="progress-section">
+                      <div className="progress-stats">
+                        <span>{massSendStatus}</span>
+                      </div>
+                      <div className="progress-bar">
+                        <div className="progress-fill" style={{ width: `${massSendProgress}%` }}></div>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="mass-actions">
+                    <button 
+                      className="btn-secondary"
+                      onClick={() => setShowMassMessage(false)}
+                      disabled={isSendingMass}
+                    >
+                      ❌ Cancelar
+                    </button>
+                    <button 
+                      className="btn-primary"
+                      onClick={startMassSend}
+                      disabled={isSendingMass || !massMessage.trim()}
+                    >
+                      {isSendingMass ? '📤 Enviando...' : '📤 Iniciar Envio'}
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
                         onClick={() => setShowMassMessage(false)}
                         disabled={isSendingMass}
                       >
