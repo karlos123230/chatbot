@@ -1250,16 +1250,31 @@ function App() {
     if (!selectedChat || !quickMessage.trim()) return;
     
     try {
-      await fetch(`${API_URL}/api/send`, {
+      const response = await fetch(`${API_URL}/api/send`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ to: selectedChat.id, message: quickMessage })
       });
-      setQuickMessage('');
-      // Recarregar mensagens
-      setTimeout(() => loadChatMessages(selectedChat.id), 500);
+      
+      if (response.ok) {
+        // Adicionar mensagem localmente para feedback imediato
+        const newMessage = {
+          id: Date.now(),
+          body: quickMessage,
+          fromMe: true,
+          timestamp: Date.now() / 1000
+        };
+        setChatMessages(prev => [...prev, newMessage]);
+        setQuickMessage('');
+        
+        // Recarregar mensagens do servidor após 1 segundo
+        setTimeout(() => loadChatMessages(selectedChat.id), 1000);
+      } else {
+        alert('Erro ao enviar mensagem. Tente novamente.');
+      }
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error);
+      alert('Erro ao enviar mensagem. Verifique sua conexão.');
     }
   };
 
