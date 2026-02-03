@@ -241,10 +241,16 @@ function App() {
       console.log('✅ WhatsApp conectado!');
       setLoadingMessage('Conectado!');
       fetchStatus();
+      fetchChats(); // Carregar conversas ao conectar
     });
 
     socket.on('message', () => {
       fetchStatus();
+      fetchChats(); // Atualizar conversas quando receber mensagem
+      // Se há um chat selecionado, recarregar suas mensagens
+      if (selectedChat) {
+        loadChatMessages(selectedChat.id);
+      }
     });
 
     socket.on('loading', (data) => {
@@ -290,7 +296,7 @@ function App() {
       socket.off('connect');
       socket.off('disconnect');
     };
-  }, []);
+  }, [selectedChat]);
 
   const fetchStatus = async () => {
     const res = await fetch(`${API_URL}/api/status`);
